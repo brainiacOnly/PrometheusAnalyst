@@ -1,0 +1,46 @@
+courseware_studentmodule - процес перегляду/проходження елементів курсу стедунтами
+	- id
+	- module_type = [chapter, course, openassessment, problem, sequential, video]
+	- module_id - внутрішній ID елементу курсу (модуля) в системі
+	- student_id - унікальний ID студента
+	- state
+	- grade - оцінка (тільки для problem)
+	- created - дата створення запису
+	- modified - дата модифікації запису
+	- max_grade - максимальна оцінка?
+	- done - N/A
+	- course_id - унікальний ID курсу
+
+courseware_studentmodulehistory - історія по кожному модулю для кожного користувача; 
+				відповідає даним з таблиці courseware_studentmodule
+
+auth_userprofile - інформація по користувачам
+	- user_id - унікальний ID студента
+	- language
+	- location
+	- gender - стать = [m,f]
+	- year_of_birth
+	- level_of_education:
+		- "p" - кандидатський чи докторський ступінь
+		- "m" - магістр
+		- "b" - бакалавр
+		- "a" - незакінчена вища освіта
+		- "hs" - середня освіта
+		- "jhs" - професійно-технічна освіта
+		- "el" - початкова освіта
+		- "none" - немає
+		- "other" - інше
+
+certificates_generatedcertificate - інформація по згенерованим сертифікатам
+	- user_id - унікальний ID студента
+	- grade - оцінка за курс (від 0 до 1)
+	- course_id - унікальний ID курсу
+	- status:
+		- notpassing - студент не пройшов курс на данйи момент
+		- downloadable - студент успішно закінчив курс (набрав необхідну кількість балів)
+
+courseware_xmodulestudentprefsfield - опції користувачів щодо перегляду курсів (наразі стосуються налаштувань перегляду відео)
+	- field_name - зараз тільки global_speed
+	- module_type - зараз тільки video
+	- value - значення поля (для відео це 0.5, 1.0, 1.25, 1.5, 2.0)
+	- student_id - унікальний ID студента
