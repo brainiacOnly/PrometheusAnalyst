@@ -4,7 +4,7 @@ import time
 import copy
 import datetime
 from sklearn import linear_model
-from sklearn.cross_validation import cross_val_predict
+#from sklearn.cross_validation import cross_val_predict
 from sklearn.cross_validation import cross_val_score
 from sklearn.naive_bayes import GaussianNB
 from sklearn import preprocessing
@@ -13,18 +13,16 @@ from sklearn.neighbors import KNeighborsClassifier
 from imblearn.under_sampling import RandomUnderSampler
 from sklearn.linear_model import SGDClassifier
 from imblearn.under_sampling import NeighbourhoodCleaningRule
-from imblearn.under_sampling import NearMiss
-from imblearn.under_sampling import AllKNN
-from imblearn.under_sampling import EditedNearestNeighbours
-from imblearn.under_sampling import EditedNearestNeighbours
-from imblearn.under_sampling import RepeatedEditedNearestNeighbours
 
 if __name__ == "__main__":
 	print 'test started...'
+
+	#######data load#######
 	course_id = 'KNU/101/2014_T2'
 	user_id = 20
 	targetColumns = pd.read_csv('data\dummy\ds_x0.csv').columns.tolist()[:-1]
-	
+
+	##
 	result = []
 	main_start_time = time.time()
 	for i in range(14,15):
@@ -38,10 +36,10 @@ if __name__ == "__main__":
 		#output = y_resampled
 		input = baseFrame[targetColumns]
 		output = baseFrame.status
-		sampler = RandomUnderSampler()
+		sampler = NeighbourhoodCleaningRule()
 		start_time = time.time()
 		input, output = sampler.fit_sample(input, output)
-		print 'sampling has taken in {0}'.format(time.time() - start_time)
+		print 'sampling has taken'.format(time.time() - start_time)
 		
 		#prediction test
 		#models = [GaussianNB(),GaussianNB(),linear_model.LogisticRegression(n_jobs=-1)]
@@ -71,5 +69,5 @@ if __name__ == "__main__":
 		print str(i*5) + 'is done after ' + str(time.time() - main_start_time) + ' seconds after start'
 
 	df = pd.DataFrame(result)
-	df.to_csv('data\\result.csv',header=False,index=False,sep='\t')
+	df.to_csv('data\\result1.csv',header=False,index=False,sep='\t')
 	print 'test finished!'
