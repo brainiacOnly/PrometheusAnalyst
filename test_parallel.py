@@ -4,7 +4,6 @@ import time
 import copy
 import datetime
 from sklearn import linear_model
-#from sklearn.cross_validation import cross_val_predict
 from sklearn.cross_validation import cross_val_score
 from sklearn.naive_bayes import GaussianNB
 from sklearn import preprocessing
@@ -25,7 +24,7 @@ if __name__ == "__main__":
 	##
 	result = []
 	main_start_time = time.time()
-	for i in range(14,15):
+	for i in range(0,28):
 		name = 'data\dummy\ds_x{0}.csv'.format(i*5)
 		baseFrame = pd.read_csv(name)
 		
@@ -36,19 +35,18 @@ if __name__ == "__main__":
 		#output = y_resampled
 		input = baseFrame[targetColumns]
 		output = baseFrame.status
-		sampler = NeighbourhoodCleaningRule()
+		#sampler = NeighbourhoodCleaningRule()
 		start_time = time.time()
-		input, output = sampler.fit_sample(input, output)
+		#input, output = sampler.fit_sample(input, output)
 		print 'sampling has taken'.format(time.time() - start_time)
 		
 		#prediction test
-		#models = [GaussianNB(),GaussianNB(),linear_model.LogisticRegression(n_jobs=-1)]
 		models = [GaussianNB(),linear_model.SGDClassifier(),linear_model.LogisticRegression()]
 		row = []
 		for m in models:
 			model = m
 			start_time = time.time()
-			predicted = cross_val_score(model, input, output, cv=10)
+			predicted = cross_val_score(model, input, output, cv=10, n_jobs=-1)
 			row.append(time.time() - start_time)
 			
 			print 'cross_validation_timing on name "{0}" is {1}'.format(name, row[-1])

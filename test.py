@@ -27,7 +27,7 @@ if __name__ == "__main__":
 	
 	result = []
 	main_start_time = time.time()
-	for i in range(14,15):
+	for i in range(0,28):
 		name = 'data\dummy\ds_x{0}.csv'.format(i*5)
 		baseFrame = pd.read_csv(name)
 		
@@ -38,10 +38,10 @@ if __name__ == "__main__":
 		#output = y_resampled
 		input = baseFrame[targetColumns]
 		output = baseFrame.status
-		sampler = RandomUnderSampler()
+		#sampler = RandomUnderSampler()
 		start_time = time.time()
-		input, output = sampler.fit_sample(input, output)
-		print 'sampling has taken in {0}'.format(time.time() - start_time)
+		#input, output = sampler.fit_sample(input, output)
+		#print 'sampling has taken in {0}'.format(time.time() - start_time)
 		
 		#prediction test
 		#models = [GaussianNB(),GaussianNB(),linear_model.LogisticRegression(n_jobs=-1)]
