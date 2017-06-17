@@ -37,10 +37,11 @@ if __name__ == "__main__":
 		input = baseFrame[targetColumns]
 		output = baseFrame.status
 		
-		models = [RandomUnderSampler(), RandomOverSampler(), TomekLinks(),NeighbourhoodCleaningRule(),
-            SMOTE(kind='regular'), SMOTE(kind='borderline1'), 
-            SMOTE(kind='borderline2'), SMOTE(kind='svm'),
-           NearMiss(version=3)]
+		#models = [RandomUnderSampler(), RandomOverSampler(), TomekLinks(),NeighbourhoodCleaningRule(),
+        #    SMOTE(kind='regular'), SMOTE(kind='borderline1'), 
+        #    SMOTE(kind='borderline2'), SMOTE(kind='svm'),
+        #   NearMiss(version=3)]
+		models = [RandomUnderSampler(), RandomOverSampler(),NeighbourhoodCleaningRule(n_jobs=-1),SMOTE(kind='regular',n_jobs=-1)]
 		row = []
 		for m in models:
 			start_time = time.time()

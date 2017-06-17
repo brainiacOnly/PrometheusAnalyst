@@ -24,7 +24,7 @@ if __name__ == "__main__":
 	##
 	result = []
 	main_start_time = time.time()
-	for i in range(0,28):
+	for i in range(5,15):
 		name = 'data\dummy\ds_x{0}.csv'.format(i*5)
 		baseFrame = pd.read_csv(name)
 		
@@ -49,18 +49,22 @@ if __name__ == "__main__":
 			predicted = cross_val_score(model, input, output, cv=10, n_jobs=-1)
 			row.append(time.time() - start_time)
 			
-			print 'cross_validation_timing on name "{0}" is {1}'.format(name, row[-1])
+			start_time = time.time()
+			predicted = cross_val_score(model, input, output, cv=10)
+			row.append(time.time() - start_time)
+			
+			#print 'cross_validation_timing on name "{0}" is {1}'.format(name, row[-1])
 			
 			#score = float(np.sum(predicted == output))/len(input)
-			start_time = time.time()
-			model.fit(input,output)
-			row.append(time.time() - start_time)
-			print 'fit_timing on name "{0}" is {1}'.format(name, row[-1])
+			##tart_time = time.time()
+			#model.fit(input,output)
+			#row.append(time.time() - start_time)
+			#print 'fit_timing on name "{0}" is {1}'.format(name, row[-1])
 			
 			#ols = res_features.columns.tolist()[:last]
-			start_time = time.time()
-			answer = model.predict(baseFrame[targetColumns].ix[user_id].tolist())
-			row.append(time.time() - start_time)
+			#start_time = time.time()
+			#answer = model.predict(baseFrame[targetColumns].ix[user_id].tolist())
+			#row.append(time.time() - start_time)
 			print 'predict_timing on name "{0}" is {1}'.format(name, row[-1])
 		result.append(row)
 		
